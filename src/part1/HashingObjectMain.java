@@ -2,6 +2,8 @@ package part1;
 
 import lombok.*;
 
+import java.util.Arrays;
+
 public class HashingObjectMain {
     public static void main(String[] args) {
         val cus1 = new CustomerSideA(100, "Thanh 1");
@@ -13,7 +15,7 @@ public class HashingObjectMain {
 
         val cus3 = new CustomerSideB(100, "Thanh 3");
         System.out.printf("Check cus1.hashCode: %d -- cus3.hashCode: %d \n",cus1.hashCode(),cus3.hashCode());
-        //System.out.printf("Check cus1=cus3: %s \n",cus1.equals(cus3));
+        // System.out.printf("Check cus1=cus3: %s \n",cus1.equals(cus3));
     }
 }
 
@@ -26,7 +28,10 @@ class CustomerSideA{
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(customerId);
+        //return Integer.hashCode(customerId);
+        return Arrays.hashCode(new Object[]{customerId});
+        // ??? org.apache.commons.lang3.builder.HashCodeBuilder
+        //return new HashCodeBuilder().append(customerId).toHashCode();
     }
 
     @Override
