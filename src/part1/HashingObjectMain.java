@@ -3,6 +3,8 @@ package part1;
 import lombok.*;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Objects;
 
 public class HashingObjectMain {
     public static void main(String[] args) {
@@ -59,3 +61,27 @@ class CustomerSideB{
     }
 }
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+class CustomerSideC{
+    private Integer customerId;
+    private Integer followerId;
+    private Date startTime;
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(customerId );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof CustomerSideC) {
+            return Objects.equals(this.customerId, ((CustomerSideC) obj).customerId)
+                    && Objects.equals(this.followerId, ((CustomerSideC) obj).followerId);
+        }
+        System.out.println(".....Unexpected Type");
+        return false;
+    }
+}
