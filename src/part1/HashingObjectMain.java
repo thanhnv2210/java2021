@@ -65,13 +65,15 @@ class CustomerSideB{
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class CustomerSideC{
+class CustomerSideC implements Comparable<CustomerSideC>{
+    private String name;
     private Integer customerId;
     private Integer followerId;
     private Date startTime;
 
     @Override
     public int hashCode() {
+//        return Objects.hash(customerId, name );
         return Integer.hashCode(customerId );
     }
 
@@ -83,5 +85,14 @@ class CustomerSideC{
         }
         System.out.println(".....Unexpected Type");
         return false;
+    }
+
+    @Override
+    public int compareTo(CustomerSideC o) {
+        System.out.print(" .. ");
+        int result = this.followerId.compareTo(o.followerId);
+        if (result == 0)
+            return this.customerId.compareTo(o.customerId);
+        return result;
     }
 }
